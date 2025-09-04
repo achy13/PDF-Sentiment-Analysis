@@ -20,5 +20,5 @@ def split_into_paragraphs(text):
 
 def analyze_paragraph(paragraph):
     blob = TextBlob(paragraph)
-    scope = blob.sentiment.polarity
-    return {"parahraph": paragraph, "scope": scope}
+    score = blob.sentiment.polarity
+    return {"parahraph": paragraph, "score": score}
