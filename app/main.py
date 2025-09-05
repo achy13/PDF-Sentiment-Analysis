@@ -20,7 +20,6 @@ async def analyze_pdf(file: UploadFile = File(...)):
         result = analyze_paragraph(p)
         insert_paragraph(doc_id, p, result['score'])
         scores.append(result['score'])
-        print(result)
 
     if scores:
         overall_score = sum(scores) / len(scores)

@@ -75,12 +75,11 @@ def fetch_document(document_id):
     con = sqlite3.connect(DATABASE_PATH)
     c = con.cursor()
 
-    # земи документ
     c.execute('''
         SELECT id, filename, overall_sentiment
         FROM documents
         WHERE id = ?
-    ''', (document_id,))  # <- запирка е многу важна
+    ''', (document_id,))  
     doc_row = c.fetchone()
     if not doc_row:
         con.close()
@@ -88,7 +87,6 @@ def fetch_document(document_id):
 
     doc_id, filename, overall_sentiment = doc_row
 
-    # земи параграфи
     c.execute('''
         SELECT id, text, sentiment_score
         FROM paragraphs
