@@ -65,3 +65,46 @@ def update_document_score(document_id, overall_score):
     
     con.commit()
     con.close()
+
+def fetch_document(document_id):
+    try:
+        document_id = int(document_id)
+    except ValueError:
+        return None
+
+    con = sqlite3.connect(DATABASE_PATH)
+    c = con.cursor()
+
+    c.execute('''
+        SELECT id, filename, overall_sentiment
+        FROM documents
+        WHERE id = ?
+    ''', (document_id,))  
+    doc_row = c.fetchone()
+    if not doc_row:
+        con.close()
+        return None
+
+    doc_id, filename, overall_sentiment = doc_row
+
+    c.execute('''
+        SELECT id, text, sentiment_score
+        FROM paragraphs
+        WHERE document_id = ?
+        ORDER BY id
+    ''', (doc_id,))
+    paragraphs_rows = c.fetchall() or []
+
+    paragraphs = [
+        {"paragraph_id": pid, "text": text, "score": sentiment_score}
+        for pid, text, sentiment_score in paragraphs_rows
+    ]
+
+    con.close()
+
+    return {
+        "document_id": doc_id,
+        "filename": filename,
+        "overall_sentiment": overall_sentiment,
+        "paragraphs": paragraphs
+    }
