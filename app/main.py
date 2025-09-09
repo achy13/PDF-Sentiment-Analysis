@@ -5,6 +5,8 @@ from app.database import create_tables, insert_document, insert_paragraph, updat
 
 app = FastAPI()
 
+create_tables()
+
 @app.post("/analyze_pdf")
 async def analyze_pdf(file: UploadFile = File(...)):
     pdf_path = f"data/{file.filename}"
