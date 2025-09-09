@@ -54,9 +54,9 @@ Open http://localhost:8000/docs to access the interactive API documentation.
 
 Endpoints
 
-POST /analyze_pdf → Upload a PDF and analyze sentiment
+- POST /analyze_pdf → Upload a PDF and analyze sentiment
 
-GET /analysis/{document_id} → Retrieve analysis results for a document
+- GET /analysis/{document_id} → Retrieve analysis results for a document
 
 ---
 
