@@ -1,4 +1,4 @@
-**PDF Sentiment Analysis API**
+# **PDF Sentiment Analysis API**
 
 
 A FastAPI-based application for analyzing the sentiment of PDF documents. This project extracts text from PDFs, splits it into paragraphs, and evaluates the sentiment of each paragraph as well as the overall sentiment of the document.
