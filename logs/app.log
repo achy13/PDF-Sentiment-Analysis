@@ -1,0 +1,19 @@
+2025-09-10 14:58:43,809 [INFO] app.main: Fetching analysis for document_id=8
+2025-09-10 14:59:26,243 [INFO] app.main: Fetching analysis for document_id=60
+2025-09-10 14:59:40,138 [INFO] app.main: Fetching analysis for document_id=100
+2025-09-10 14:59:40,139 [WARNING] app.main: Document 100 not found
+2025-09-10 15:01:17,872 [INFO] app.main: Recieved file: Stories.pdf
+2025-09-10 15:01:17,948 [INFO] app.main: Extracted 15 paragraphs from Stories.pdf
+2025-09-10 15:01:18,080 [INFO] app.main: Document 62 analyzed with overall score: 0.006734006734006733
+2025-09-10 13:15:09,798 [INFO] app.main: Fetching analysis for document_id=54
+2025-09-10 13:15:09,820 [WARNING] app.main: Document 54 not found
+2025-09-10 13:15:15,232 [INFO] app.main: Fetching analysis for document_id=1
+2025-09-10 13:15:15,235 [WARNING] app.main: Document 1 not found
+2025-09-10 13:15:50,563 [INFO] app.main: Recieved file: Stories.pdf
+2025-09-10 13:15:51,680 [INFO] app.main: Extracted 15 paragraphs from Stories.pdf
+2025-09-10 13:15:53,790 [INFO] app.main: Document 1 analyzed with overall score: 0.006734006734006733
+2025-09-10 13:16:03,665 [INFO] app.main: Fetching analysis for document_id=1
+2025-09-10 15:50:17,282 [INFO] app.main: Recieved file: Stories.pdf
+2025-09-10 15:50:17,365 [INFO] app.main: Extracted 3 paragraphs from Stories.pdf
+2025-09-10 15:50:17,432 [INFO] app.main: Document 63 analyzed with overall score: 0.05233164983164982
+2025-09-10 15:50:44,735 [INFO] app.main: Fetching analysis for document_id=63
