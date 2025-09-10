@@ -1,14 +1,25 @@
+import os, logging
 from fastapi import FastAPI, UploadFile, File, HTTPException, Path
 from fastapi.responses import JSONResponse
 from app.utils import extract_pdf, split_into_paragraphs, analyze_paragraph
 from app.database import create_tables, insert_document, insert_paragraph, update_document_score, fetch_document
 
 app = FastAPI()
-
 create_tables()
+
+os.makedirs("logs", exist_ok=True)
+
+logging.basicConfig(
+    filename="logs/app.log",
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+
+logger = logging.getLogger(__name__)
 
 @app.post("/analyze_pdf")
 async def analyze_pdf(file: UploadFile = File(...)):
+    logger.info(f"Recieved file: {file.filename}")
     pdf_path = f"data/{file.filename}"
     with open(pdf_path, "wb") as f:
         f.write(await file.read())
@@ -16,25 +27,30 @@ async def analyze_pdf(file: UploadFile = File(...)):
     doc_id = insert_document(filename=file.filename, overall_sentiment=None)
     text = extract_pdf(pdf_path)
     paragraphs = split_into_paragraphs(text)
+    logger.info(f"Extracted {len(paragraphs)} paragraphs from {file.filename}")
 
     scores = []
     for p in paragraphs:
         result = analyze_paragraph(p)
         insert_paragraph(doc_id, p, result['score'])
         scores.append(result['score'])
+        logger.debug(f"Paragraph score: {result['score']}")
 
     if scores:
         overall_score = sum(scores) / len(scores)
     else:
         overall_score = 0
     update_document_score(doc_id, overall_score)
+    logger.info(f"Document {doc_id} analyzed with overall score: {overall_score}")
 
     return JSONResponse({"document_id": doc_id, "overall_score": overall_score})
 
 @app.get("/analysis/{document_id}")
 def get_analysis(document_id: int = Path(...)):
+    logger.info(f"Fetching analysis for document_id={document_id}")
     document = fetch_document(document_id)
     if not document:
+        logger.warning(f"Document {document_id} not found")
         raise HTTPException(status_code=404, detail="Document not found")
     return document
 

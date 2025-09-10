@@ -5,7 +5,8 @@ services:
     build: .
     container_name: pdf_api
     volumes:
-      - ./data:/app/data    
+      - ./data:/app/data   
+      - ./logs:/app/logs 
     ports:
       - "8000:8000"
     restart: unless-stopped
