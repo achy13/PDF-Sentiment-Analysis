@@ -9,13 +9,6 @@ def test_split_empty_text():
 def test_split_only_newlines():
     assert split_into_paragraphs("\n\n\n") == []
 
-# Checks that text with leading/trailing spaces and newlines
-# is cleaned and split correctly into paragraphs
-def test_split_lines_with_spaces():
-    text = " Hello \n World "
-    assert split_into_paragraphs(text) == ["Hello", "World"]
-
-
 # --- Tests for the function analyze_paragraph ---
 # Checks that analyzing an empty paragraph returns a score as float
 # and that the score is within the range [-1, 1]

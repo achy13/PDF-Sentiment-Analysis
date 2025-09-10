@@ -13,7 +13,7 @@ def extract_pdf(pdf_path):
 
 
 def split_into_paragraphs(text):
-    paragraphs = re.split(r'\n+', text)
+    paragraphs = re.split(r'\n\s*\n', text)
     paragraphs = [p.strip() for p in paragraphs if p.strip()]
     return paragraphs
 
